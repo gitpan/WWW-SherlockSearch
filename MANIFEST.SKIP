@@ -1,5 +1,7 @@
-^Build$
+#defaults
 ^Makefile$
-^_build/
 ^blib/
-^plugins/
+^pm_to_blib$
+^blibdirs$
+^Build$
+^_build/

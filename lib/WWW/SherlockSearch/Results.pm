@@ -1,5 +1,5 @@
 # $File: //member/autrijus/WWW-SherlockSearch/lib/WWW/SherlockSearch/Results.pm $ $Author: autrijus $
-# $Revision: #6 $ $Change: 3469 $ $DateTime: 2003/01/13 02:36:40 $
+# $Revision: #8 $ $Change: 9675 $ $DateTime: 2004/01/11 16:26:16 $ vim: expandtab shiftwidth=4
 
 package WWW::SherlockSearch::Results;
 
@@ -11,7 +11,7 @@ WWW::SherlockSearch::Results - Sherlock search results
 
 =head1 SYNOPSIS
 
-    use WWW::SherlockSearch::Result;
+    use WWW::SherlockSearch::Results;
 
     my $resultStruct = WWW::SherlockSearch::Results->new;
 
@@ -322,7 +322,10 @@ Autrijus Tang E<lt>autrijus@autrijus.orgE<gt>
 
 Copyright 1999, 2000, 2001 by Damian Steer.
 
-Copyright 2002, 2003 by Kang-min Liu, Autrijus Tang.
+Copyright 2002, 2003 by Kang-min Liu.
+
+Copyright 2002, 2003, 2004 by Autrijus Tang.
+
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
@@ -330,11 +333,3 @@ under the same terms as Perl itself.
 See L<http://www.perl.com/perl/misc/Artistic.html>
 
 =cut
-
-__END__
-# Local variables:
-# c-indentation-style: bsd
-# c-basic-offset: 4
-# indent-tabs-mode: nil
-# End:
-# vim: expandtab shiftwidth=4:

@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.34.
+signed via the Module::Signature module, version 0.37.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -14,22 +14,33 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 1ae2f6f6048dccd3096a0815922f4ff6b6e492b7 Build.PL
-SHA1 46a18a40f4e47a0d3f5cfb63f8f623e02c36770a Changes
-SHA1 23e2aa3403aa50e28c06ee7a31d5da5d0726eea2 MANIFEST
-SHA1 5ff8a398c84d4a21588962f92c9ce058cf457ab3 MANIFEST.SKIP
+SHA1 dc6b78504926f94dcf94abeb3ad8ab0753c65caf Build.PL
+SHA1 35d7913ab2935a2081d7a35474e51591069f7ca5 Changes
+SHA1 1845ebee1dfe419df24d6b19c54501ac2f6d73b4 MANIFEST
+SHA1 c87154580248fba54cdee0477bf82516b4878b18 MANIFEST.SKIP
 SHA1 b4ae6ec8823484c444440d1b0664405418add2e9 META.yml
-SHA1 7dfc1d3d65b1fb47c03881a283cf95f26aae8e1e Makefile.PL
-SHA1 bd1df6cbc7418eeb8bb3bd639d547505936e6fc2 README
-SHA1 369c187917aa4431d0e28574271215e466570c17 lib/WWW/SherlockSearch.pm
-SHA1 563cf384d6ce74b5557a39b50063b635d34b4fd9 lib/WWW/SherlockSearch/Results.pm
+SHA1 3dbd155e3117045a814d0897ac05b18c1c506a23 Makefile.PL
+SHA1 aa9aed652f1dfbef943b721bb5468e295e93cec5 README
+SHA1 77cf68ef0f74f617aaa3a9efa64ec717d6e082ee inc/Module/Install.pm
+SHA1 342463eab1ecaf4a4824afbbc34faccc364ca8c7 inc/Module/Install/Base.pm
+SHA1 670cdbeb099c0cb39d23a3908da23364dbfefa79 inc/Module/Install/Build.pm
+SHA1 49eb99cdf06faaf8627179eb611adf29fe86c72e inc/Module/Install/Can.pm
+SHA1 bcee63bdc6667b0827b5461a1e1ad779b207fc23 inc/Module/Install/Fetch.pm
+SHA1 5a0dd7ab5c4feb056e69ff722d101c55b41dd295 inc/Module/Install/Makefile.pm
+SHA1 9419c3349d870b66c3974f81e10cdc8ac5cc7c7a inc/Module/Install/Metadata.pm
+SHA1 52e2f858e52946610fdf3343d4f4ccaf719fe746 inc/Module/Install/Win32.pm
+SHA1 d0805806c93cd291a62156ae07ff7dd49931fde1 inc/Module/Install/WriteAll.pm
+SHA1 1870279ab8226800a8e80699d3a28efb45696bfb lib/WWW/SherlockSearch.pm
+SHA1 b17a9159a5e4adb5c3bd414cdb62060b3d11211f lib/WWW/SherlockSearch/Results.pm
+SHA1 e05720a68e033f0299784e5debdd1465414197a7 plugins/clkao.src
+SHA1 34adf8961aaa10271e498cc31fc0ec4ec4da1bba plugins/googlenews.src
 SHA1 b7671bb805f2097cbec944c8edd3b7c86b160822 script/sherch
-SHA1 012aa70302a4656b98e4dcb0f9747d23c7d8bd12 t/0-signature.t
+SHA1 3fc293e7c21f0508282708b9e225f7173f0c4768 t/0-signature.t
 SHA1 ee83f0a1ec7456f20d9ba44d881aaf69ef22d24e t/1-basic.t
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.2.2 (FreeBSD)
+Version: GnuPG v1.2.1 (FreeBSD)
 
-iD8DBQE/QXN3tLPdNzw1AaARAq9VAJ0ejQexgBEe9CdsgAlT8ZPVc1KragCfTAmp
-1wBFo4hQ4whQYI6iR/LNbbY=
-=B0Sa
+iD8DBQFAAXontLPdNzw1AaARAtvtAKCy+IQiIOA0BCbRgYMPDs5FqH7XYwCeOBXW
+SX5C5GwnoGO65M9IHliaAuk=
+=91mw
 -----END PGP SIGNATURE-----

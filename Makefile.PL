@@ -1,81 +1,19 @@
 #!/usr/bin/perl
 # $File: //member/autrijus/WWW-SherlockSearch/Makefile.PL $ 
-# $Revision: #3 $ $Change: 3015 $ $DateTime: 2002/12/31 07:13:50 $
+# $Revision: #5 $ $Change: 9675 $ $DateTime: 2004/01/11 16:26:16 $
 
-# This Makefile.PL creates a pass-through Makefile that simply calls
-# the equivalent Module::Build methods for each make target.  See the
-# documentation for Module::Build::Compat for more information.
+use inc::Module::Install;
 
-unless (eval "use Module::Build::Compat 0.02; 1" ) {
-    require Cwd;
-    require File::Spec;
-    require ExtUtils::MakeMaker;
+name        ('WWW-SherlockSearch');
+version_from('lib/WWW/SherlockSearch.pm');
+license     ('perl');
+recommends  ('XML::RSS' => '0.90');
+recommends  ('Encode::compat' => '0.05') if $] < 5.007001;
+requires    (
+    'LWP'                   => '5.60',
+    'HTTP::Cookies'         => '1.00',
+    'HTTP::Request::Common' => '1.00',
+    'HTML::Entities'        => '0.00',
+);
 
-    my $yn = '';
-    # Check if we're likely to have permission to install Module::Build
-    if (-w $INC{'ExtUtils/MakeMaker.pm'}) {
-        my $UnderCPAN = do {
-            my ($cwd, $cpan);
-            # Check if we're under the non-reentrant CPAN.pm
-            require CPAN;
-            CPAN::Config->load;
-
-            my $cwd  = File::Spec->canonpath(Cwd::cwd());
-            my $cpan = File::Spec->canonpath($CPAN::Config->{cpan_home});
-            return (index($cwd, $cpan) > -1);
-        } unless(eval { require CPANPLUS::Backend; 1 });
-
-        if (!$UnderCPAN) {
-            print "This module requires Module::Build to install itself.\n";
-
-            $yn = ExtUtils::MakeMaker::prompt(
-                '  Install Module::Build from CPAN?', 'y'
-            );
-        }
-    }
-
-    if ($yn =~ /^y/i) {
-        # Save this 'cause CPAN will chdir all over the place.
-        my $cwd = Cwd::cwd();
-        my $makefile = File::Spec->rel2abs($0);
-
-        if (eval { require CPANPLUS::Backend; 1 }) {
-            CPANPLUS::Backend->new->install(
-                modules => [ 'Module::Build' ]
-            );
-        }
-        else {
-            require CPAN;
-            CPAN::Shell->install('Module::Build::Compat');
-        }
-
-        chdir $cwd or die "Cannot chdir() back to $cwd: $!";
-        exec $^X, $makefile, @ARGV;  # Redo now that we have Module::Build
-    } else {
-        warn << '.';
-This module requires Module::Build to install itself.
-Please re-run Makefile.PL with root privilege to install it
-automatically from CPAN, or manually download it from:
-
-    http://search.cpan.org/author/KWILLIAMS/Module-Build/
-
-.
-        # Leave hints for CPAN.pm and CPANPLUS.pm
-        ExtUtils::MakeMaker::WriteMakefile(
-            PREREQ_PM   => { 'Module::Build' => 0.11 }
-        );
-
-        exit(0);
-    }
-}
-
-Module::Build::Compat->run_build_pl(args => \@ARGV);
-Module::Build::Compat->write_makefile();
-
-__END__
-# Local variables:
-# c-indentation-style: bsd
-# c-basic-offset: 4
-# indent-tabs-mode: nil
-# End:
-# vim: expandtab shiftwidth=4:
+&WriteAll( sign => 1 );

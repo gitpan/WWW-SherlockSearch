@@ -1,13 +1,13 @@
 # $File: //member/autrijus/WWW-SherlockSearch/lib/WWW/SherlockSearch.pm $ $Author: autrijus $
-# $Revision: #27 $ $Change: 7592 $ $DateTime: 2003/08/19 00:31:54 $
+# $Revision: #29 $ $Change: 9675 $ $DateTime: 2004/01/11 16:26:16 $ vim: expandtab shiftwidth=4
 
 package WWW::SherlockSearch;
-$WWW::SherlockSearch::VERSION = '0.15';
+$WWW::SherlockSearch::VERSION = '0.17';
 
 use strict;
 use vars '$ExcerptLength';
 
-use LWP;
+use LWP::RobotUA;
 use HTTP::Cookies;
 use HTTP::Request::Common;
 use WWW::SherlockSearch::Results;
@@ -20,8 +20,8 @@ WWW::SherlockSearch - Parse and execute Apple Sherlock 2 plugins
 
 =head1 VERSION
 
-This document describes version 0.15 of WWW::SherlockSearch, released
-August 19, 2003.
+This document describes version 0.17 of WWW::SherlockSearch, released
+January 12, 2003.
 
 =head1 SYNOPSIS
 
@@ -128,7 +128,7 @@ sub initialiseSearch {
         }} = parseSherlock(\$content);
     }
 
-    $action = $self->{search}->{action} or return;
+    $action = $self->{search}{action} or return;
 
     ($basehref) = ($action =~ /(.*\/)/);
     ($host)     = ($action =~ /(.*\/\/.*?)\//);
@@ -304,8 +304,8 @@ sub printHash {
 
 sub find {
     my ($self, $query, $limit, $skip_href) = @_;
-    my $search = LWP::UserAgent->new(
-	agent => 'Mozilla/5.0 Gecko/libwww-perl'
+    my $search = LWP::RobotUA->new(
+        'Mozilla/5.0 Gecko/libwww-perl', 'autrijus@cpan.org',
     );
     my ($result, @post, $get, $rv);
 
@@ -436,12 +436,14 @@ sub convertResults {
 
     if (!$resultStruct) {
         $resultStruct = WWW::SherlockSearch::Results->new;
-        $resultStruct->setServiceName($self->{search}->{name});
-        $resultStruct->setServiceDescription($self->{search}->{description});
+        $resultStruct->setServiceName($self->{search}{name});
+        $resultStruct->setServiceDescription($self->{search}{description});
         $resultStruct->setBaseHREF($self->{basehref});
         $resultStruct->setHost($self->{host});
         $resultStruct->setPictureUrl($self->getPictureUrl);
-        $resultStruct->setChannelUrl($self->getChannelUrl);
+        $resultStruct->setChannelUrl(
+            $self->getChannelUrl || $self->{search}{action}
+        );
         $resultStruct->setQueryAttr($self->getQueryAttr);
     }
 
@@ -459,10 +461,10 @@ sub convertResults {
     }
     else {
 	$resultStruct->setBannerLink(
-	    $self->fixRef($self->{search}->{bannerlink}));
-	$bannerimageurl = $self->getIMG($self->{search}->{bannerimage});
+	    $self->fixRef($self->{search}{bannerlink}));
+	$bannerimageurl = $self->getIMG($self->{search}{bannerimage});
 	if (!$bannerimageurl) {
-	    $bannerimageurl = $self->fixRef($self->{search}->{bannerimage});
+	    $bannerimageurl = $self->fixRef($self->{search}{bannerimage});
 	}
 	$resultStruct->setBannerImage($bannerimageurl);
     }
@@ -656,7 +658,7 @@ sub asString {
     $string .= "Base Href := " . $self->{basehref} . "\n";
     $string .= "Host := " . $self->{host} . "\n";
     foreach my $key (keys %{ $self->{search} }) {
-	$string .= "$key := " . $self->{search}->{$key} . "\n";
+	$string .= "$key := " . $self->{search}{$key} . "\n";
     }
 
     $string .= "\nInterpret :\n\n";
@@ -727,19 +729,19 @@ sub asRssString {
     my $rss = XML::RSS->(version => '1.0');
 
     $rss->channel(
-	title       => fixEm($self->{search}->{name}),
+	title       => fixEm($self->{search}{name}),
 	link        => fixEm($self->getChannelUrl),
-	description => fixEm($self->{search}->{description})
+	description => fixEm($self->{search}{description})
     );
 
     $rss->image(
-	title => fixEm($self->{search}->{name}),
+	title => fixEm($self->{search}{name}),
 	url   => fixEm($self->getPictureUrl),
 	link  => fixEm($self->{host})
     );
 
     $rss->textinput(
-	title       => fixEm($self->{search}->{name}),
+	title       => fixEm($self->{search}{name}),
 	description => "Search this site",
 	name        => fixEm($self->getQueryAttr),
 	link        => fixEm($self->getChannelUrl)
@@ -808,7 +810,9 @@ Autrijus Tang E<lt>autrijus@autrijus.orgE<gt>
 
 Copyright 1999, 2000, 2001 by Damian Steer.
 
-Copyright 2002, 2003 by Kang-min Liu, Autrijus Tang.
+Copyright 2002, 2003 by Kang-min Liu.
+
+Copyright 2002, 2003, 2004 by Autrijus Tang.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
@@ -816,11 +820,3 @@ under the same terms as Perl itself.
 See L<http://www.perl.com/perl/misc/Artistic.html>
 
 =cut
-
-__END__
-# Local variables:
-# c-indentation-style: bsd
-# c-basic-offset: 4
-# indent-tabs-mode: nil
-# End:
-# vim: expandtab shiftwidth=4:
