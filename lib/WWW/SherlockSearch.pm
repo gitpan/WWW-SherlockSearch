@@ -1,8 +1,8 @@
 # $File: //member/autrijus/WWW-SherlockSearch/lib/WWW/SherlockSearch.pm $ $Author: autrijus $
-# $Revision: #20 $ $Change: 3465 $ $DateTime: 2003/01/13 02:30:31 $
+# $Revision: #23 $ $Change: 3584 $ $DateTime: 2003/01/17 05:12:30 $
 
 package WWW::SherlockSearch;
-$WWW::SherlockSearch::VERSION = '0.13';
+$WWW::SherlockSearch::VERSION = '0.14';
 
 use strict;
 use vars '$ExcerptLength';
@@ -20,8 +20,8 @@ WWW::SherlockSearch - Parse and execute Apple Sherlock 2 plugins
 
 =head1 VERSION
 
-This document describes version 0.13 of WWW::SherlockSearch, released
-January 13, 2002.
+This document describes version 0.14 of WWW::SherlockSearch, released
+January 17, 2003.
 
 =head1 SYNOPSIS
 
@@ -694,7 +694,9 @@ sub asSherlockString {
     my $string = '';
 
     foreach my $stage ( qw(prefetch postfetch search) ) {
-        $string .= _fmt($stage => $self->{$stage});
+        $string .= _fmt($stage => $self->{$stage})
+            if length $self->{$stage}{action};
+
         $stage =~ /^(.*?)(?:fetch)?$/ or next;
 
         foreach my $list (@{$self->{"$1inputList"}}) {
@@ -708,7 +710,8 @@ sub asSherlockString {
         }
 
         $string .= "</\U$stage\E>\n\n"
-            if $self->{$stage} and %{$self->{$stage}};
+            if $self->{$stage} and %{$self->{$stage}}
+                and length $self->{$stage}{action};
     }
 
     return $string;

@@ -1,5 +1,5 @@
 # $File: //member/autrijus/WWW-SherlockSearch/lib/WWW/SherlockSearch/Results.pm $ $Author: autrijus $
-# $Revision: #4 $ $Change: 3463 $ $DateTime: 2003/01/13 02:27:08 $
+# $Revision: #6 $ $Change: 3469 $ $DateTime: 2003/01/13 02:36:40 $
 
 package WWW::SherlockSearch::Results;
 
@@ -262,10 +262,10 @@ sub asRssString {
 
     my ($url, $cont, $rel, $summary, $fulltext, $date);
     while (($url, $cont, $rel, $summary, $fulltext, $date) = $self->get) {
-        $summary = substr($fulltext, 0, $WWW::SherlockSearch::ExcerptLength)
-            if !length $summary
-            and length $fulltext
-            and $WWW::SherlockSearch::ExcerptLength;
+        if (!length $summary and length $fulltext and $WWW::SherlockSearch::ExcerptLength) {
+            $summary = substr($fulltext, 0, $WWW::SherlockSearch::ExcerptLength);
+            $summary .= '...' unless $summary eq $fulltext;
+        }
 
 	$rss->add_item(
 	    title       => fixEm($cont),
