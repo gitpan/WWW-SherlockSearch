@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 # $File: //member/autrijus/WWW-SherlockSearch/Build.PL $ 
-# $Revision: #2 $ $Change: 2853 $ $DateTime: 2002/12/23 11:57:55 $
+# $Revision: #3 $ $Change: 7592 $ $DateTime: 2003/08/19 00:31:54 $
 
 use strict;
 use Module::Build;
@@ -8,6 +8,8 @@ use Module::Build;
 my $m = Module::Build->new(
     module_name         => 'WWW::SherlockSearch',
     license             => 'perl',
+    sign                => 1,
+    dynamic_config      => 1,
 
     recommends          => {
 	'XML::RSS'              => '0.90',

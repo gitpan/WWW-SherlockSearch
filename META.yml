@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name: WWW-SherlockSearch
-version: 0.14
+version: 0.15
 license: perl
 distribution_type: module
 requires:
@@ -13,4 +13,12 @@ recommends:
   XML::RSS: 0.90
 build_requires: {}
 conflicts: {}
-generated_by: Module::Build version 0.14
+dynamic_config: 1
+provides:
+  WWW::SherlockSearch:
+    file: lib/WWW/SherlockSearch.pm
+    version: 0.15
+  WWW::SherlockSearch::Results:
+    file: lib/WWW/SherlockSearch/Results.pm
+    version: ~
+generated_by: Module::Build version 0.18_04

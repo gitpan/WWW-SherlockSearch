@@ -1,8 +1,8 @@
 # $File: //member/autrijus/WWW-SherlockSearch/lib/WWW/SherlockSearch.pm $ $Author: autrijus $
-# $Revision: #23 $ $Change: 3584 $ $DateTime: 2003/01/17 05:12:30 $
+# $Revision: #27 $ $Change: 7592 $ $DateTime: 2003/08/19 00:31:54 $
 
 package WWW::SherlockSearch;
-$WWW::SherlockSearch::VERSION = '0.14';
+$WWW::SherlockSearch::VERSION = '0.15';
 
 use strict;
 use vars '$ExcerptLength';
@@ -20,8 +20,8 @@ WWW::SherlockSearch - Parse and execute Apple Sherlock 2 plugins
 
 =head1 VERSION
 
-This document describes version 0.14 of WWW::SherlockSearch, released
-January 17, 2003.
+This document describes version 0.15 of WWW::SherlockSearch, released
+August 19, 2003.
 
 =head1 SYNOPSIS
 
@@ -626,8 +626,11 @@ sub fixRef {
     $host     = $self->{host};
 
     # This doesn't work for relative links :-(
-    if ($url !~ /^http:\/\//) {
-	$url = ($url =~ /^\//) ? $host . $url : $basehref . $url;
+    if ($url !~ m{^(?:\w+:)?//}) {
+	$url = ($url =~ m{^/}) ? $host . $url : $basehref . $url;
+    }
+    if ($url =~ m{^//} and $basehref =~ m{^(\w+:)}) {
+        $url = $1 . $url;
     }
     return $url;
 }
@@ -683,7 +686,7 @@ sub _fmt {
         my $val = $attr->{$key};
         ($key) = grep {lc($_) eq lc($key)} @{$Attr{$tag}} or next;
         $val =~ s/"/\\"/g;
-        $rv .= qq(\t$key="$val"\n);
+        $rv .= qq(\t$key="$val"\n) if length $val;
     }
 
     return "$rv>\n";
@@ -697,7 +700,7 @@ sub asSherlockString {
         $string .= _fmt($stage => $self->{$stage})
             if length $self->{$stage}{action};
 
-        $stage =~ /^(.*?)(?:fetch)?$/ or next;
+        $stage =~ /^(.*?)(?:fetch)?(?:search)?$/ or next;
 
         foreach my $list (@{$self->{"$1inputList"}}) {
             $string .= _fmt(input => $list);
