@@ -15,23 +15,23 @@ not run its Makefile.PL or Build.PL.
 Hash: SHA1
 
 SHA1 dc6b78504926f94dcf94abeb3ad8ab0753c65caf Build.PL
-SHA1 a62f1aeb2903e4f4969086ac89f6b4e136e2c662 Changes
+SHA1 cf02efd66fc9ae7156f9927cab000fd92f4e49c4 Changes
 SHA1 1845ebee1dfe419df24d6b19c54501ac2f6d73b4 MANIFEST
 SHA1 c87154580248fba54cdee0477bf82516b4878b18 MANIFEST.SKIP
-SHA1 76d6c89e69482cd38c6dca9007608d642f70fc2c META.yml
-SHA1 3dbd155e3117045a814d0897ac05b18c1c506a23 Makefile.PL
+SHA1 3ccdc0f3366018ee68fdf9aeec560d1423557a13 META.yml
+SHA1 c9a1a7bf90fa4004bcf4a60333d76c407c741fb9 Makefile.PL
 SHA1 aa9aed652f1dfbef943b721bb5468e295e93cec5 README
-SHA1 d78c824a321715b390518287a8929623d7a55050 inc/Module/Install.pm
-SHA1 adfc45c82642d3726cc2c871c49062c000ccb0e4 inc/Module/Install/Base.pm
-SHA1 811132669f715dec91d7ab4979274db977669a4f inc/Module/Install/Build.pm
-SHA1 ba881ecfb8e8b9c4ebbc409b8025cac973511197 inc/Module/Install/Can.pm
-SHA1 c03e641fcc136de2fbdd62ce4e82e2dfa8410962 inc/Module/Install/Fetch.pm
-SHA1 876226cc896a285b2409db88d9033071c68cec50 inc/Module/Install/Makefile.pm
-SHA1 2a0dd241db019def435fde8537e600a182750824 inc/Module/Install/Metadata.pm
-SHA1 1915204e46fcee6faf528f8d86aec215e332cc7b inc/Module/Install/Win32.pm
-SHA1 acf1fd355f805442c195dc9dc4e764ad742862e1 inc/Module/Install/WriteAll.pm
-SHA1 807e610aee452a486b7569510daa989ae806f3e4 lib/WWW/SherlockSearch.pm
-SHA1 b17a9159a5e4adb5c3bd414cdb62060b3d11211f lib/WWW/SherlockSearch/Results.pm
+SHA1 2b65fc08c268c16ae7097d800bacccc7b8c9c905 inc/Module/Install.pm
+SHA1 fd56d5c793014bccac2cd1e61926c4da8538ef99 inc/Module/Install/Base.pm
+SHA1 bbbff3a31911f37d7445b4f20a29597a0a648886 inc/Module/Install/Build.pm
+SHA1 9ce6768a7b8f7032ec89594b773fafd58c6feb1d inc/Module/Install/Can.pm
+SHA1 b6c8f0f22c4c8ba48a7bac2c5e4bd61803a7b097 inc/Module/Install/Fetch.pm
+SHA1 aabcd47178e4e7b27e340ff5273269c93697c9c1 inc/Module/Install/Makefile.pm
+SHA1 207dfa13341a374fc78325fbeb99bc36659aef2d inc/Module/Install/Metadata.pm
+SHA1 aff9341a15c04faec47089851e43d9d4061337e7 inc/Module/Install/Win32.pm
+SHA1 8e0d347ca21bc18b380d9d1aa5910b8d078a76b7 inc/Module/Install/WriteAll.pm
+SHA1 28e34a2accf70e8ceaf0e9dfa8bbfa4b73557620 lib/WWW/SherlockSearch.pm
+SHA1 cb64787caafd667b697177fa622a94bcf7c09f2c lib/WWW/SherlockSearch/Results.pm
 SHA1 e05720a68e033f0299784e5debdd1465414197a7 plugins/clkao.src
 SHA1 34adf8961aaa10271e498cc31fc0ec4ec4da1bba plugins/googlenews.src
 SHA1 b7671bb805f2097cbec944c8edd3b7c86b160822 script/sherch
@@ -40,7 +40,7 @@ SHA1 ee83f0a1ec7456f20d9ba44d881aaf69ef22d24e t/1-basic.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.2.3 (FreeBSD)
 
-iD8DBQFAAsWltLPdNzw1AaARAuLXAJ9bJ5n5sX03XmRofMvfMNL6umJc7ACgiPMC
-MURbU7mPdG2bE3F8t+DnEqs=
-=ztWK
+iD8DBQFArwp4tLPdNzw1AaARAnF3AJ9F4Uct5rYcVSkTq6g8OYb+0UlhmACeJxH/
+6ck7hriJsrTkag4iw3UcVvI=
+=BrxS
 -----END PGP SIGNATURE-----

@@ -1,12 +1,13 @@
 #!/usr/bin/perl
 # $File: //member/autrijus/WWW-SherlockSearch/Makefile.PL $ 
-# $Revision: #5 $ $Change: 9675 $ $DateTime: 2004/01/11 16:26:16 $
+# $Revision: #6 $ $Change: 10623 $ $DateTime: 2004/05/22 08:07:29 $
 
 use inc::Module::Install;
 
 name        ('WWW-SherlockSearch');
 version_from('lib/WWW/SherlockSearch.pm');
 license     ('perl');
+recommends  ('XML::Atom' => '0.07');
 recommends  ('XML::RSS' => '0.90');
 recommends  ('Encode::compat' => '0.05') if $] < 5.007001;
 requires    (

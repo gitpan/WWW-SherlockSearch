@@ -1,5 +1,5 @@
 # $File: //member/autrijus/WWW-SherlockSearch/lib/WWW/SherlockSearch/Results.pm $ $Author: autrijus $
-# $Revision: #8 $ $Change: 9675 $ $DateTime: 2004/01/11 16:26:16 $ vim: expandtab shiftwidth=4
+# $Revision: #10 $ $Change: 10623 $ $DateTime: 2004/05/22 08:07:29 $ vim: expandtab shiftwidth=4
 
 package WWW::SherlockSearch::Results;
 
@@ -29,6 +29,7 @@ WWW::SherlockSearch::Results - Sherlock search results
     # ... add some more entries
 
     my $text = $results->asString;
+    my $atom = $results->asAtomString;
     my $rss  = $results->asRssString;
     my $html = $results->asHtmlString;
 
@@ -228,6 +229,56 @@ sub asHtmlString {
     return $string;
 }
 
+sub asAtomString {
+    my $self = shift;
+
+    require DateTime;
+    require XML::Atom::Feed;
+    require XML::Atom::Link;
+    require XML::Atom::Entry;
+
+    my $feed = XML::Atom::Feed->new;
+    $feed->title($self->getServiceName);
+    $feed->info($self->getServiceDescription);
+
+    my $link = XML::Atom::Link->new;
+    $link->type('text/html');
+    $link->rel('alternate');
+    $link->title($self->getServiceName);
+    $link->href($self->getChannelUrl);
+    $feed->add_link($link);
+    $feed->modified(DateTime->now->iso8601 . 'Z');
+
+    my $author = XML::Atom::Person->new;
+    $author->name($self->getServiceName);
+
+    $self->entry_callback(sub {
+        my ($url, $cont, $rel, $summary, $fulltext, $date) = @_;
+
+        my $dt = DateTime->from_epoch( epoch => $date );
+        my $entry = XML::Atom::Entry->new;
+        $entry->title($cont);
+        $entry->content($fulltext);
+        $entry->summary($summary);
+        $entry->issued($dt->iso8601 . 'Z');
+        $entry->modified($dt->iso8601 . 'Z');
+        $entry->id($url);
+        $entry->author($author);
+
+        my $link = XML::Atom::Link->new;
+        $link->type('text/html');
+        $link->rel('alternate');
+        $link->href($url);
+        $link->title($cont);
+        $entry->add_link($link);
+        $feed->add_entry($entry);
+    });
+
+    my $xml = $feed->as_xml;
+    $xml =~ s/<feed\b(?![^>]*version=)/<feed version="0.3"/;
+    return $xml;
+}
+
 sub asRssString {
     my $self = shift;
 
@@ -258,15 +309,8 @@ sub asRssString {
 	link        => fixEm($self->getChannelUrl)
     );
 
-    $self->reset;
-
-    my ($url, $cont, $rel, $summary, $fulltext, $date);
-    while (($url, $cont, $rel, $summary, $fulltext, $date) = $self->get) {
-        if (!length $summary and length $fulltext and $WWW::SherlockSearch::ExcerptLength) {
-            $summary = substr($fulltext, 0, $WWW::SherlockSearch::ExcerptLength);
-            $summary .= '...' unless $summary eq $fulltext;
-        }
-
+    $self->entry_callback(sub {
+        my ($url, $cont, $rel, $summary, $fulltext, $date) = @_;
 	$rss->add_item(
 	    title       => fixEm($cont),
 	    link        => fixEm($url),
@@ -277,9 +321,22 @@ sub asRssString {
 	    }
 ) : (),
 	);
-    }
+    });
 
     return $rss->as_string;
+}
+
+sub entry_callback {
+    my ($self, $callback) = @_;
+    $self->reset;
+
+    while (my ($url, $cont, $rel, $summary, $fulltext, $date) = $self->get) {
+        if (!length $summary and length $fulltext and $WWW::SherlockSearch::ExcerptLength) {
+            $summary = substr($fulltext, 0, $WWW::SherlockSearch::ExcerptLength);
+            $summary .= '...' unless $summary eq $fulltext;
+        }
+        $callback->($url, $cont, $rel, $summary, $fulltext, $date);
+    }
 }
 
 #This is a cludge to fix xml problems

@@ -1,4 +1,14 @@
 ____________________________________________________________________________
+[ 10623] By: autrijus                              on 2004/05/22  08:07:29
+        Log: * This be 0.20.
+             * $results->asAtomString is officially supported.
+	   ! Makefile.PL lib/WWW/SherlockSearch.pm
+	   ! lib/WWW/SherlockSearch/Results.pm
+____________________________________________________________________________
+[ 10621] By: autrijus                              on 2004/05/22  07:50:56
+        Log: * try to make it atom 0.3 valid.
+	   ! lib/WWW/SherlockSearch/Results.pm
+____________________________________________________________________________
 [  9681] By: autrijus                              on 2004/01/12  15:44:47
         Log: * oops, typo
 	   ! lib/WWW/SherlockSearch.pm

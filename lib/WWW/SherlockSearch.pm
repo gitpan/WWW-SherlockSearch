@@ -1,8 +1,8 @@
 # $File: //member/autrijus/WWW-SherlockSearch/lib/WWW/SherlockSearch.pm $ $Author: autrijus $
-# $Revision: #31 $ $Change: 9681 $ $DateTime: 2004/01/12 15:44:47 $ vim: expandtab shiftwidth=4
+# $Revision: #32 $ $Change: 10623 $ $DateTime: 2004/05/22 08:07:29 $ vim: expandtab shiftwidth=4
 
 package WWW::SherlockSearch;
-$WWW::SherlockSearch::VERSION = '0.18';
+$WWW::SherlockSearch::VERSION = '0.20';
 
 use strict;
 use vars qw($ExcerptLength $UAClass);
@@ -20,8 +20,8 @@ WWW::SherlockSearch - Parse and execute Apple Sherlock 2 plugins
 
 =head1 VERSION
 
-This document describes version 0.18 of WWW::SherlockSearch, released
-January 12, 2003.
+This document describes version 0.20 of WWW::SherlockSearch, released
+May 22, 2004.
 
 =head1 SYNOPSIS
 
