@@ -1,8 +1,8 @@
 # $File: //member/autrijus/WWW-SherlockSearch/lib/WWW/SherlockSearch.pm $ $Author: autrijus $
-# $Revision: #10 $ $Change: 2859 $ $DateTime: 2002/12/23 17:06:01 $
+# $Revision: #17 $ $Change: 2912 $ $DateTime: 2002/12/25 10:07:27 $
 
 package WWW::SherlockSearch;
-$WWW::SherlockSearch::VERSION = '0.11';
+$WWW::SherlockSearch::VERSION = '0.12';
 
 use strict;
 
@@ -17,8 +17,8 @@ WWW::SherlockSearch - Parse and execute Apple Sherlock 2 plugins
 
 =head1 VERSION
 
-This document describes version 0.11 of WWW::SherlockSearch, released
-December 24, 2002.
+This document describes version 0.12 of WWW::SherlockSearch, released
+December 25, 2002.
 
 =head1 SYNOPSIS
 
@@ -42,6 +42,9 @@ This module parses and executes Apple Sherlock 2 plugin files,
 and generate a result set that can be expressed in text, HTML
 or RSS format.  It is a repackaged and cleaned-up version of
 Damian Steer's B<Sherch> service at L<http://www.sherch.com/>.
+
+Please see L<http://mycroft.mozdev.org/> for a repository and
+detailed description of Sherlock 2 plugins.
 
 =cut
 
@@ -129,7 +132,8 @@ sub initialiseSearch {
 my %Attr = (
     search      => [qw{
 	name method action update updateCheckDays
-	description bannerImage bannerLink routeType queryCharset
+	description bannerImage bannerLink routeType
+        queryEncoding queryCharset queryLimit
     }],
     input       => [qw{
 	value name user user1 user2 user3 usern prefix suffix mode
@@ -139,6 +143,7 @@ my %Attr = (
 	resultListStart resultListEnd resultItemStart resultItemEnd
 	priceStart priceEnd availStart availEnd dateStart dateEnd
 	nameStart nameEnd emailStart emailEnd
+        pageNextStart pageNextEnd
 	resultItemFind resultItemReplace
 	resultContentStart resultContentEnd
     }],
@@ -283,7 +288,7 @@ sub printHash {
 }
 
 sub find {
-    my ($self, $find, $limit, $skip_href) = @_;
+    my ($self, $query, $limit, $skip_href) = @_;
     my $search = LWP::UserAgent->new(
 	agent => 'Mozilla/5.0 Gecko/libwww-perl'
     );
@@ -293,6 +298,11 @@ sub find {
 
     foreach my $stage (qw/prefetch search postfetch/) {
 	next unless $self->{$stage}{method} and $self->{$stage}{action};
+
+        my $find = _encode(
+            $self->{$stage}{querycharset} || $self->{$stage}{queryencoding},
+            $query,
+        );
 
 	if ($self->{$stage}->{method} =~ /post/i) {
 	    @post = $self->getPostData($stage, $find);
@@ -309,34 +319,37 @@ sub find {
 
 	next unless $stage eq 'search';
         
-        if (!$result->is_success) {
-            print "$stage / $self->{$stage}->{method}: Warn: " .
-                   $result->code . " " . $result->message;
-            next;
+        while ($result) {
+            if (!$result->is_success) {
+                print "$stage / $self->{$stage}->{method}: Warn: " .
+                    $result->code . " " . $result->message;
+                last;
+            }
+
+            $self->{content} = _decode(
+                $self->{$stage}{querycharset} || $self->{$stage}{queryencoding},
+                $result->content,
+            );
+
+            ($rv, $result) = $self->convertResults(
+                $self->{content}, $search, $limit, $skip_href, $result->date, $rv
+            );
         }
-
-        $self->{content} = recode(
-            $self->{$stage}{querycharset}, $result->content
-        );
-
-        $rv = $self->convertResults($self->{content}, $search, $limit, $skip_href);
     }
 
     return $rv;
 }
 
-sub recode {
-    my ($charset, $content) = @_;
+sub _encode {
+    my $charset = shift || 'utf8';
+    require Encode::compat if $] < 5.007001; require Encode;
+    return Encode::encode($charset, $_[0]);
+}
 
-    if ($charset) {
-	eval {
-	    require Encode::compat if $] < 5.007001;
-	    require Encode;
-	    $content = Encode::decode($charset, $content);
-	};
-    }
-
-    return $content;
+sub _decode {
+    my $charset = shift || 'utf8';
+    require Encode::compat if $] < 5.007001; require Encode;
+    return Encode::decode($charset, $_[0]);
 }
 
 sub getPostData {
@@ -398,25 +411,26 @@ sub getGetData {
 # The following methods are used to interpret results
 
 sub convertResults {
-    my ($self, $html, $search, $limit, $skip_href) = @_;
+    my ($self, $html, $search, $limit, $skip_href, $result_date, $resultStruct) = @_;
+    $limit ||= $self->{search}{querylimit};
 
     # It appears plugins can have more than one interpet tag
     # I only use the first
     my $interpret = $self->{interpretList}->[0];
-    my ($banner, @results, $bannerimageurl, $bannerurl);
+    my ($banner, @results, $bannerimageurl, $bannerurl, $pagenexturl);
 
-    my $resultStruct = WWW::SherlockSearch::Results->new;
-
-    $resultStruct->setServiceName($self->{search}->{name});
-    $resultStruct->setServiceDescription($self->{search}->{description});
-    $resultStruct->setBaseHREF($self->{basehref});
-    $resultStruct->setHost($self->{host});
-    $resultStruct->setPictureUrl($self->getPictureUrl);
-    $resultStruct->setChannelUrl($self->getChannelUrl);
-    $resultStruct->setQueryAttr($self->getQueryAttr);
+    if (!$resultStruct) {
+        $resultStruct = WWW::SherlockSearch::Results->new;
+        $resultStruct->setServiceName($self->{search}->{name});
+        $resultStruct->setServiceDescription($self->{search}->{description});
+        $resultStruct->setBaseHREF($self->{basehref});
+        $resultStruct->setHost($self->{host});
+        $resultStruct->setPictureUrl($self->getPictureUrl);
+        $resultStruct->setChannelUrl($self->getChannelUrl);
+        $resultStruct->setQueryAttr($self->getQueryAttr);
+    }
 
     # get that banner
-
     if ($interpret->{bannerstart}) {
 	($banner) = getDelimited(
 	    \$html,
@@ -436,6 +450,15 @@ sub convertResults {
 	    $bannerimageurl = $self->fixRef($self->{search}->{bannerimage});
 	}
 	$resultStruct->setBannerImage($bannerimageurl);
+    }
+
+    if ($interpret->{pagenextstart}) {
+	($pagenexturl) = getDelimited(
+	    \$html,
+	    $interpret->{pagenextstart},
+	    $interpret->{pagenextend}
+	);
+	($pagenexturl) = $self->getHREF($pagenexturl);
     }
 
     if ($interpret->{resultliststart}) {
@@ -469,7 +492,6 @@ sub convertResults {
 
     my ($item, $temp, $relev, $itemurl, $content, $rest, $fulltext, $date);
 
-    my $count = 0;
     foreach $item (@results) {
 	require HTML::Entities;
 	$item =~ s/&nbsp;/ /g;    # :-(~~~
@@ -514,8 +536,9 @@ sub convertResults {
 	    my $result = $search->request(GET $itemurl);
 
 	    if ($result->is_success) {
-		my $item = recode(
-		    $self->{search}{querycharset}, $result->content
+		my $item = _decode(
+		    $self->{search}{querycharset} || $self->{search}{queryencoding},
+                    $result->content,
 		);
 
 		($fulltext) = getDelimited(
@@ -534,13 +557,22 @@ sub convertResults {
 	    }
 	}
 
-	$resultStruct->add($itemurl, $content, $relev, $rest, $fulltext, $date);
+	$resultStruct->add(
+            $itemurl, $content, $relev, $rest, $fulltext, $date || $result_date
+        );
 
-        last if $limit and ++$count >= $limit;
+        if ($limit and $resultStruct->getNumResults >= $limit) {
+            $pagenexturl = ''; # no next page, please
+            last;
+        }
     }
 
     $self->{resultArray} = $resultStruct;
-    return $resultStruct;
+
+    return (
+        $resultStruct,
+        $pagenexturl ? ($search->request(GET $pagenexturl)) : ()
+    );
 }
 
 sub stripTags {

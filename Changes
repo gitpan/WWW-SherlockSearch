@@ -1,4 +1,44 @@
 ____________________________________________________________________________
+[  2913] By: autrijus                              on 2002/12/25  10:14:23
+        Log: * This be 0.12.
+             * some rudimentary POD for 'sherch'.
+	   ! script/sherch
+____________________________________________________________________________
+[  2912] By: autrijus                              on 2002/12/25  10:07:27
+        Log: * oops, limit didn't work on multipage.
+             * script/sherch now don't pose arbitary limits.
+	   ! lib/WWW/SherlockSearch.pm script/sherch
+____________________________________________________________________________
+[  2907] By: autrijus                              on 2002/12/25  06:44:15
+        Log: * beginning of support for next page and querylimit.
+             * also accepts queryencoding if querycharset is not
+	       specified.
+	   ! lib/WWW/SherlockSearch.pm
+____________________________________________________________________________
+[  2899] By: autrijus                              on 2002/12/24  13:03:45
+        Log: * oopsie.
+	   ! lib/WWW/SherlockSearch.pm
+____________________________________________________________________________
+[  2896] By: autrijus                              on 2002/12/24  11:52:30
+        Log: * proper date support.
+	   ! lib/WWW/SherlockSearch.pm
+____________________________________________________________________________
+[  2891] By: autrijus                              on 2002/12/24  10:27:41
+        Log: * now encodes the query string before sending out.
+	   ! lib/WWW/SherlockSearch.pm
+____________________________________________________________________________
+[  2890] By: autrijus                              on 2002/12/24  10:27:27
+        Log: * show usage.
+	   ! script/sherch
+____________________________________________________________________________
+[  2864] By: autrijus                              on 2002/12/23  17:39:19
+        Log: * fnord. :)
+	   ! plugins/clkao.src
+____________________________________________________________________________
+[  2860] By: autrijus                              on 2002/12/23  17:06:53
+        Log: * changes and signatures.
+	   ! Changes META.yml SIGNATURE
+____________________________________________________________________________
 [  2859] By: autrijus                              on 2002/12/23  17:06:01
         Log: * This be 0.11.
              * Fixed redundant </prefetch> and </postfetch> lines
