@@ -1,0 +1,14 @@
+#!/usr/bin/perl
+# (c) Damian Steer 1999, 2000, 2001
+# (c) Autrijus Tang, 2002
+
+use lib '.';
+use open OUT => ':utf8';
+use WWW::SherlockSearch;
+
+$sourcefile = -f $ARGV[0] ? $ARGV[0] : "plugins/$ARGV[0]";
+$infoSearch = WWW::SherlockSearch->new;
+$infoSearch->loadFile($sourcefile);
+$results = $infoSearch->find("$ARGV[1]", 1);
+
+print $infoSearch->resultsAsString;

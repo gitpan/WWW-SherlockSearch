@@ -1,0 +1,35 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.21.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It would check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 1f58d2aee657c03b6421273bb444b1d49235c496 Build.PL
+SHA1 d76b9789928718dfc1651be168dc145abac9ad81 Changes
+SHA1 23e2aa3403aa50e28c06ee7a31d5da5d0726eea2 MANIFEST
+SHA1 5ff8a398c84d4a21588962f92c9ce058cf457ab3 MANIFEST.SKIP
+SHA1 42d11fdff827dbfd7d17bac430e7e606ff39fdb2 META.yml
+SHA1 b606a7b9a16cfe6a2c9e3e1bf9300ef4a4645247 Makefile.PL
+SHA1 bd1df6cbc7418eeb8bb3bd639d547505936e6fc2 README
+SHA1 417be9a0aebef337e499e2a10d0412a01c262f84 lib/WWW/SherlockSearch.pm
+SHA1 6b9c483a5b440872fb9c2c3f7ccacd79123f05e8 lib/WWW/SherlockSearch/Results.pm
+SHA1 219eef394f14c0831b29eea35aa0c42dd3fbe14f script/sherch
+SHA1 012aa70302a4656b98e4dcb0f9747d23c7d8bd12 t/0-signature.t
+SHA1 563087bfdb87ea991e4244fe7cda71087461f5aa t/1-basic.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.2.1 (FreeBSD)
+
+iD8DBQE+BBnKtLPdNzw1AaARAvDzAKCW9zkhg936VM4VdHsE0jfVSUTJwgCfR4kW
+F7Lt0Sa/k89Xwcaw16JLcvg=
+=kvCC
+-----END PGP SIGNATURE-----

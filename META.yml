@@ -1,0 +1,15 @@
+--- #YAML:1.0
+name: WWW-SherlockSearch
+version: 0.10
+license: perl
+distribution_type: module
+requires:
+  HTTP::Cookies: 1.00
+  HTTP::Request::Common: 1.00
+  LWP: 5.60
+  perl: 5.005
+recommends:
+  XML::RSS: 0.90
+build_requires: {}
+conflicts: {}
+generated_by: Module::Build version 0.14

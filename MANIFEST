@@ -1,0 +1,13 @@
+Build.PL
+Changes
+MANIFEST
+MANIFEST.SKIP
+META.yml
+Makefile.PL
+README
+SIGNATURE
+lib/WWW/SherlockSearch.pm
+lib/WWW/SherlockSearch/Results.pm
+script/sherch
+t/0-signature.t
+t/1-basic.t
