@@ -1,4 +1,23 @@
 ____________________________________________________________________________
+[  2859] By: autrijus                              on 2002/12/23  17:06:01
+        Log: * This be 0.11.
+             * Fixed redundant </prefetch> and </postfetch> lines
+             in asSherlockString.
+	   ! lib/WWW/SherlockSearch.pm
+____________________________________________________________________________
+[  2854] By: autrijus                              on 2002/12/23  11:58:17
+        Log: * converts <br> and handles entities in contents.
+	   ! lib/WWW/SherlockSearch.pm
+____________________________________________________________________________
+[  2853] By: autrijus                              on 2002/12/23  11:57:55
+        Log: * We somehow really needs this.
+	   ! Build.PL
+____________________________________________________________________________
+[  2820] By: autrijus                              on 2002/12/21  07:14:02
+        Log: * changes and signatures.
+	   + META.yml
+	   ! Changes MANIFEST SIGNATURE
+____________________________________________________________________________
 [  2817] By: autrijus                              on 2002/12/21  06:57:21
         Log: * 0.10, first CPAN release.
 	   ! MANIFEST MANIFEST.SKIP

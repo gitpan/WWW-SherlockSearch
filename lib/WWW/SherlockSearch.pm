@@ -1,8 +1,8 @@
 # $File: //member/autrijus/WWW-SherlockSearch/lib/WWW/SherlockSearch.pm $ $Author: autrijus $
-# $Revision: #8 $ $Change: 2817 $ $DateTime: 2002/12/21 06:57:21 $
+# $Revision: #10 $ $Change: 2859 $ $DateTime: 2002/12/23 17:06:01 $
 
 package WWW::SherlockSearch;
-$WWW::SherlockSearch::VERSION = '0.10';
+$WWW::SherlockSearch::VERSION = '0.11';
 
 use strict;
 
@@ -17,8 +17,8 @@ WWW::SherlockSearch - Parse and execute Apple Sherlock 2 plugins
 
 =head1 VERSION
 
-This document describes version 0.10 of WWW::SherlockSearch, released
-December 21, 2002.
+This document describes version 0.11 of WWW::SherlockSearch, released
+December 24, 2002.
 
 =head1 SYNOPSIS
 
@@ -524,7 +524,12 @@ sub convertResults {
 		    $interpret->{resultcontentend}
 		);
 
-		stripTags(\$fulltext);
+                require HTML::Entities;
+                $fulltext =~ s/<[bB][rR]\b([^>]*)>/\n/gs;
+                $fulltext =~ s/&nbsp;/ /g;    # :-(~~~
+                HTML::Entities::decode_entities($fulltext);
+
+                stripTags(\$fulltext);
                 $date ||= $result->date;
 	    }
 	}
@@ -540,6 +545,7 @@ sub convertResults {
 
 sub stripTags {
     my $var = shift;
+    $$var =~ s/<[bB][rR]\b([^>]*)>/\n/gs;
     $$var =~ s/<([^>]+)(?:>|$)//gs;
     $$var =~ s/^\s*//;
     $$var =~ s/\s*$//;
@@ -654,7 +660,8 @@ sub asSherlockString {
             }
         }
 
-        $string .= "</\U$stage\E>\n\n";
+        $string .= "</\U$stage\E>\n\n"
+            if $self->{$stage} and %{$self->{$stage}};
     }
 
     return $string;

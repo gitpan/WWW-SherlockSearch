@@ -1,9 +1,10 @@
 --- #YAML:1.0
 name: WWW-SherlockSearch
-version: 0.10
+version: 0.11
 license: perl
 distribution_type: module
 requires:
+  HTML::Entities: 0.00
   HTTP::Cookies: 1.00
   HTTP::Request::Common: 1.00
   LWP: 5.60
