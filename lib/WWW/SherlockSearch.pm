@@ -1,15 +1,18 @@
 # $File: //member/autrijus/WWW-SherlockSearch/lib/WWW/SherlockSearch.pm $ $Author: autrijus $
-# $Revision: #17 $ $Change: 2912 $ $DateTime: 2002/12/25 10:07:27 $
+# $Revision: #20 $ $Change: 3465 $ $DateTime: 2003/01/13 02:30:31 $
 
 package WWW::SherlockSearch;
-$WWW::SherlockSearch::VERSION = '0.12';
+$WWW::SherlockSearch::VERSION = '0.13';
 
 use strict;
+use vars '$ExcerptLength';
 
 use LWP;
 use HTTP::Cookies;
 use HTTP::Request::Common;
 use WWW::SherlockSearch::Results;
+
+$ExcerptLength = 100;
 
 =head1 NAME
 
@@ -17,8 +20,8 @@ WWW::SherlockSearch - Parse and execute Apple Sherlock 2 plugins
 
 =head1 VERSION
 
-This document describes version 0.12 of WWW::SherlockSearch, released
-December 25, 2002.
+This document describes version 0.13 of WWW::SherlockSearch, released
+January 13, 2002.
 
 =head1 SYNOPSIS
 
@@ -42,6 +45,18 @@ This module parses and executes Apple Sherlock 2 plugin files,
 and generate a result set that can be expressed in text, HTML
 or RSS format.  It is a repackaged and cleaned-up version of
 Damian Steer's B<Sherch> service at L<http://www.sherch.com/>.
+
+The module differ from other Sherlock implementation in that
+it can actually follow the individual links and extract the
+full text within it, delimited by the C<resultContentStart>
+and C<resultContentEnd> tags.  In RSS, they will be expressed
+via the C<content:encoded> attribute proposed by Aaron.
+
+If there is no I<description> but I<content> is available, the
+C<$WWW::SherlockSearch::ExcerptLength> variable is used to
+determine how many leading characters to use to generate the
+description from content (defaults to C<100>).  Setting it to
+C<0> disables this feature.
 
 Please see L<http://mycroft.mozdev.org/> for a repository and
 detailed description of Sherlock 2 plugins.
@@ -787,7 +802,7 @@ Autrijus Tang E<lt>autrijus@autrijus.orgE<gt>
 
 Copyright 1999, 2000, 2001 by Damian Steer.
 
-Copyright 2002 by Kang-min Liu, Autrijus Tang.
+Copyright 2002, 2003 by Kang-min Liu, Autrijus Tang.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

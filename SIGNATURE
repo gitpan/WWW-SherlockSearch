@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.06.
+signed via the Module::Signature module, version 0.21.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -15,21 +15,21 @@ not run its Makefile.PL or Build.PL.
 Hash: SHA1
 
 SHA1 0f658fa1ada9cb2a277b6e880349127fce764bc5 Build.PL
-SHA1 66311adc7f48ff7dd4fa88c34047805acfcdeb47 Changes
+SHA1 8fdb0c9e60485f9213093708c56a1d2e052d6061 Changes
 SHA1 23e2aa3403aa50e28c06ee7a31d5da5d0726eea2 MANIFEST
 SHA1 5ff8a398c84d4a21588962f92c9ce058cf457ab3 MANIFEST.SKIP
-SHA1 6d351a87a2521258963575c10a6733bf0225777f META.yml
-SHA1 b606a7b9a16cfe6a2c9e3e1bf9300ef4a4645247 Makefile.PL
+SHA1 7fca9ca50e5077540418f3ab9185ff6c7fcfe437 META.yml
+SHA1 7dfc1d3d65b1fb47c03881a283cf95f26aae8e1e Makefile.PL
 SHA1 bd1df6cbc7418eeb8bb3bd639d547505936e6fc2 README
-SHA1 272f12470d5651c35818c9a8c424ed750f8a7004 lib/WWW/SherlockSearch.pm
-SHA1 6b9c483a5b440872fb9c2c3f7ccacd79123f05e8 lib/WWW/SherlockSearch/Results.pm
+SHA1 9970dc3feab717be2ba8f20f21528d9865d8e7be lib/WWW/SherlockSearch.pm
+SHA1 f68a35f6073c4800f52f9f6e5e00f291ddb614ce lib/WWW/SherlockSearch/Results.pm
 SHA1 b7671bb805f2097cbec944c8edd3b7c86b160822 script/sherch
 SHA1 012aa70302a4656b98e4dcb0f9747d23c7d8bd12 t/0-signature.t
-SHA1 563087bfdb87ea991e4244fe7cda71087461f5aa t/1-basic.t
+SHA1 ee83f0a1ec7456f20d9ba44d881aaf69ef22d24e t/1-basic.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.2.1 (FreeBSD)
 
-iD8DBQE+CYkAtLPdNzw1AaARAvFMAJ9mh8BFd+qzpUkgujpUfb1x3VRACQCeKlss
-33Tk7eyVjJG/qFj64mJgpz0=
-=Zime
+iD8DBQE+IiqAtLPdNzw1AaARAtUZAJ45vVZYh99PbqGVQAUkYLApirBKHQCfconQ
+5iSZ3jo6lMMbWG3ubzboIJ0=
+=iEzN
 -----END PGP SIGNATURE-----

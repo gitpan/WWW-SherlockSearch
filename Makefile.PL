@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # $File: //member/autrijus/WWW-SherlockSearch/Makefile.PL $ 
-# $Revision: #2 $ $Change: 2782 $ $DateTime: 2002/12/19 05:18:51 $
+# $Revision: #3 $ $Change: 3015 $ $DateTime: 2002/12/31 07:13:50 $
 
 # This Makefile.PL creates a pass-through Makefile that simply calls
 # the equivalent Module::Build methods for each make target.  See the
@@ -14,13 +14,18 @@ unless (eval "use Module::Build::Compat 0.02; 1" ) {
     my $yn = '';
     # Check if we're likely to have permission to install Module::Build
     if (-w $INC{'ExtUtils/MakeMaker.pm'}) {
-        # Check if we're under the non-reentrant CPAN.pm
-        require CPAN;
-        CPAN::Config->load;
+        my $UnderCPAN = do {
+            my ($cwd, $cpan);
+            # Check if we're under the non-reentrant CPAN.pm
+            require CPAN;
+            CPAN::Config->load;
 
-        my $cwd  = File::Spec->canonpath(Cwd::cwd());
-        my $cpan = File::Spec->canonpath($CPAN::Config->{cpan_home});
-        if (index($cwd, $cpan) == -1) {
+            my $cwd  = File::Spec->canonpath(Cwd::cwd());
+            my $cpan = File::Spec->canonpath($CPAN::Config->{cpan_home});
+            return (index($cwd, $cpan) > -1);
+        } unless(eval { require CPANPLUS::Backend; 1 });
+
+        if (!$UnderCPAN) {
             print "This module requires Module::Build to install itself.\n";
 
             $yn = ExtUtils::MakeMaker::prompt(

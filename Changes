@@ -1,4 +1,43 @@
 ____________________________________________________________________________
+[  3465] By: autrijus                              on 2003/01/13  02:30:31
+        Log: * 100 is better.
+             * this be .13.
+	   ! lib/WWW/SherlockSearch.pm
+____________________________________________________________________________
+[  3464] By: autrijus                              on 2003/01/13  02:29:22
+        Log: * a sane default for excerpt length.
+	   ! lib/WWW/SherlockSearch.pm
+____________________________________________________________________________
+[  3463] By: autrijus                              on 2003/01/13  02:27:08
+        Log: * implement excerpt.
+	   ! lib/WWW/SherlockSearch.pm
+	   ! lib/WWW/SherlockSearch/Results.pm
+____________________________________________________________________________
+[  3213] By: gugod                                 on 2003/01/05  11:19:29
+        Log: Sucessfully fetch the first listItem now.
+	   ! plugins/googlenews.src
+____________________________________________________________________________
+[  3212] By: autrijus                              on 2003/01/05  11:09:58
+        Log: * fixed.
+	   ! plugins/googlenews.src
+____________________________________________________________________________
+[  3210] By: autrijus                              on 2003/01/05  11:05:26
+        Log: * not working.
+	   + plugins/googlenews.src
+____________________________________________________________________________
+[  3015] By: autrijus                              on 2002/12/31  07:13:50
+        Log: * clkao pointed out that we shouldn't initialize CPAN.pm in
+	       vain.
+	   ! Makefile.PL
+____________________________________________________________________________
+[  2919] By: autrijus                              on 2002/12/25  14:42:03
+        Log: * nitpick
+	   ! t/1-basic.t
+____________________________________________________________________________
+[  2914] By: autrijus                              on 2002/12/25  10:14:54
+        Log: * changes and signatures.
+	   ! Changes META.yml SIGNATURE
+____________________________________________________________________________
 [  2913] By: autrijus                              on 2002/12/25  10:14:23
         Log: * This be 0.12.
              * some rudimentary POD for 'sherch'.

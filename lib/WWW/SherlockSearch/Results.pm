@@ -1,5 +1,5 @@
 # $File: //member/autrijus/WWW-SherlockSearch/lib/WWW/SherlockSearch/Results.pm $ $Author: autrijus $
-# $Revision: #3 $ $Change: 2795 $ $DateTime: 2002/12/19 20:07:58 $
+# $Revision: #4 $ $Change: 3463 $ $DateTime: 2003/01/13 02:27:08 $
 
 package WWW::SherlockSearch::Results;
 
@@ -262,6 +262,11 @@ sub asRssString {
 
     my ($url, $cont, $rel, $summary, $fulltext, $date);
     while (($url, $cont, $rel, $summary, $fulltext, $date) = $self->get) {
+        $summary = substr($fulltext, 0, $WWW::SherlockSearch::ExcerptLength)
+            if !length $summary
+            and length $fulltext
+            and $WWW::SherlockSearch::ExcerptLength;
+
 	$rss->add_item(
 	    title       => fixEm($cont),
 	    link        => fixEm($url),
@@ -317,7 +322,7 @@ Autrijus Tang E<lt>autrijus@autrijus.orgE<gt>
 
 Copyright 1999, 2000, 2001 by Damian Steer.
 
-Copyright 2002 by Kang-min Liu, Autrijus Tang.
+Copyright 2002, 2003 by Kang-min Liu, Autrijus Tang.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
