@@ -1,24 +1,15 @@
---- #YAML:1.0
 name: WWW-SherlockSearch
-version: 0.15
+version: 0.18
 license: perl
 distribution_type: module
 requires:
-  HTML::Entities: 0.00
+  LWP: 5.60
   HTTP::Cookies: 1.00
   HTTP::Request::Common: 1.00
-  LWP: 5.60
-  perl: 5.005
+  HTML::Entities: 0.00
 recommends:
   XML::RSS: 0.90
-build_requires: {}
-conflicts: {}
-dynamic_config: 1
-provides:
-  WWW::SherlockSearch:
-    file: lib/WWW/SherlockSearch.pm
-    version: 0.15
-  WWW::SherlockSearch::Results:
-    file: lib/WWW/SherlockSearch/Results.pm
-    version: ~
-generated_by: Module::Build version 0.18_04
+no_index:
+  directory:
+    - inc
+generated_by: Module::Install version 0.31

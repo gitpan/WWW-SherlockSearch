@@ -1,4 +1,15 @@
 ____________________________________________________________________________
+[  9681] By: autrijus                              on 2004/01/12  15:44:47
+        Log: * oops, typo
+	   ! lib/WWW/SherlockSearch.pm
+____________________________________________________________________________
+[  9680] By: autrijus                              on 2004/01/12  15:43:27
+        Log: * This be 0.18.
+             * ->new now may take a scalar ref to the template content.
+             * the default UA (LWP::RobotUA) is now subclassable via
+             the import line and the $UAClass variable.
+	   ! lib/WWW/SherlockSearch.pm
+____________________________________________________________________________
 [  9675] By: autrijus                              on 2004/01/11  16:26:16
         Log: * This be 0.17.
              * Tony Laszlo suggested us to use {search}{action}
@@ -7,12 +18,9 @@ ____________________________________________________________________________
              * updates copyright strings.
              * switch to either of Build/Makefile.
 	   + Build.PL
-	   ! MANIFEST Makefile.PL README lib/WWW/SherlockSearch.pm
+	   ! MANIFEST Makefile.PL README
+	   ! lib/WWW/SherlockSearch.pm
 	   ! lib/WWW/SherlockSearch/Results.pm
-____________________________________________________________________________
-[  8976] By: autrijus                              on 2003/11/20  08:27:15
-        Log: * * changes and signatures.
-	   ! Changes SIGNATURE
 ____________________________________________________________________________
 [  8975] By: autrijus                              on 2003/11/20  08:25:37
         Log: * switch to Module::Install.
@@ -28,10 +36,6 @@ ____________________________________________________________________________
 [  7686] By: autrijus                              on 2003/08/24  03:26:42
         Log: * patch from Mike Castle to fix one doc typo.
 	   ! lib/WWW/SherlockSearch/Results.pm
-____________________________________________________________________________
-[  7594] By: autrijus                              on 2003/08/19  00:46:42
-        Log: * changes and signatures.
-	   ! Changes META.yml SIGNATURE
 ____________________________________________________________________________
 [  7592] By: autrijus                              on 2003/08/19  00:31:54
         Log: * This be 0.15.
@@ -52,16 +56,13 @@ ____________________________________________________________________________
         Log: * only serialize non-empty values in ->asSherlockString.
 	   ! lib/WWW/SherlockSearch.pm
 ____________________________________________________________________________
-[  3586] By: autrijus                              on 2003/01/17  05:22:02
-        Log: * changes and signatures.
-	   ! Changes META.yml SIGNATURE
-____________________________________________________________________________
 [  3584] By: autrijus                              on 2003/01/17  05:12:30
         Log: * This be 0.14.
 	   ! lib/WWW/SherlockSearch.pm
 ____________________________________________________________________________
 [  3583] By: autrijus                              on 2003/01/17  05:10:55
-        Log: * fix asSherLockString so empty string is generated for empty
+        Log: * fix asSherLockString so empty string is generated for
+	       empty
              stages.
 	   ! lib/WWW/SherlockSearch.pm
 ____________________________________________________________________________
@@ -77,14 +78,6 @@ ____________________________________________________________________________
         Log: * add '...' in excerpt.
 	   ! lib/WWW/SherlockSearch/Results.pm
 ____________________________________________________________________________
-[  3467] By: autrijus                              on 2003/01/13  02:32:36
-        Log: * oops, wrong sequence.
-	   ! SIGNATURE
-____________________________________________________________________________
-[  3466] By: autrijus                              on 2003/01/13  02:31:59
-        Log: * changes and signatures.
-	   ! Changes META.yml SIGNATURE
-____________________________________________________________________________
 [  3465] By: autrijus                              on 2003/01/13  02:30:31
         Log: * 100 is better.
              * this be .13.
@@ -96,7 +89,8 @@ ____________________________________________________________________________
 ____________________________________________________________________________
 [  3463] By: autrijus                              on 2003/01/13  02:27:08
         Log: * implement excerpt.
-	   ! lib/WWW/SherlockSearch.pm lib/WWW/SherlockSearch/Results.pm
+	   ! lib/WWW/SherlockSearch.pm
+	   ! lib/WWW/SherlockSearch/Results.pm
 ____________________________________________________________________________
 [  3213] By: gugod                                 on 2003/01/05  11:19:29
         Log: Sucessfully fetch the first listItem now.
@@ -111,16 +105,13 @@ ____________________________________________________________________________
 	   + plugins/googlenews.src
 ____________________________________________________________________________
 [  3015] By: autrijus                              on 2002/12/31  07:13:50
-        Log: * clkao pointed out that we shouldn't initialize CPAN.pm in vain.
+        Log: * clkao pointed out that we shouldn't initialize CPAN.pm in
+	       vain.
 	   ! Makefile.PL
 ____________________________________________________________________________
 [  2919] By: autrijus                              on 2002/12/25  14:42:03
         Log: * nitpick
 	   ! t/1-basic.t
-____________________________________________________________________________
-[  2914] By: autrijus                              on 2002/12/25  10:14:54
-        Log: * changes and signatures.
-	   ! Changes META.yml SIGNATURE
 ____________________________________________________________________________
 [  2913] By: autrijus                              on 2002/12/25  10:14:23
         Log: * This be 0.12.
@@ -132,17 +123,10 @@ ____________________________________________________________________________
              * script/sherch now don't pose arbitary limits.
 	   ! lib/WWW/SherlockSearch.pm script/sherch
 ____________________________________________________________________________
-[  2911] By: autrijus                              on 2002/12/25  10:03:19
-        Log: * fulll nextpage support.
-	   ! lib/WWW/SherlockSearch.pm
-____________________________________________________________________________
-[  2910] By: autrijus                              on 2002/12/25  08:59:50
-        Log: * put querylimit as the hard data.
-	   ! lib/WWW/SherlockSearch.pm
-____________________________________________________________________________
 [  2907] By: autrijus                              on 2002/12/25  06:44:15
         Log: * beginning of support for next page and querylimit.
-             * also accepts queryencoding if querycharset is not specified.
+             * also accepts queryencoding if querycharset is not
+	       specified.
 	   ! lib/WWW/SherlockSearch.pm
 ____________________________________________________________________________
 [  2899] By: autrijus                              on 2002/12/24  13:03:45
@@ -165,10 +149,6 @@ ____________________________________________________________________________
         Log: * fnord. :)
 	   ! plugins/clkao.src
 ____________________________________________________________________________
-[  2860] By: autrijus                              on 2002/12/23  17:06:53
-        Log: * changes and signatures.
-	   ! Changes META.yml SIGNATURE
-____________________________________________________________________________
 [  2859] By: autrijus                              on 2002/12/23  17:06:01
         Log: * This be 0.11.
              * Fixed redundant </prefetch> and </postfetch> lines
@@ -183,14 +163,10 @@ ____________________________________________________________________________
         Log: * We somehow really needs this.
 	   ! Build.PL
 ____________________________________________________________________________
-[  2820] By: autrijus                              on 2002/12/21  07:14:02
-        Log: * changes and signatures.
-	   + META.yml
-	   ! Changes MANIFEST SIGNATURE
-____________________________________________________________________________
 [  2817] By: autrijus                              on 2002/12/21  06:57:21
         Log: * 0.10, first CPAN release.
-	   ! MANIFEST MANIFEST.SKIP lib/WWW/SherlockSearch.pm
+	   ! MANIFEST MANIFEST.SKIP
+	   ! lib/WWW/SherlockSearch.pm
 ____________________________________________________________________________
 [  2805] By: autrijus                              on 2002/12/20  06:51:10
         Log: * don't use RSS till needed.
@@ -202,13 +178,8 @@ ____________________________________________________________________________
 ____________________________________________________________________________
 [  2788] By: autrijus                              on 2002/12/19  15:25:38
         Log: * fix \Q\E.
-	   ! lib/WWW/SherlockSearch.pm lib/WWW/SherlockSearch/Results.pm
-____________________________________________________________________________
-[  2782] By: autrijus                              on 2002/12/19  05:18:51
-        Log: * the whole set of module infrastructure.
-	   + Changes MANIFEST MANIFEST.SKIP README SIGNATURE t/1-basic.t
-	  +> t/0-signature.t
-	  !> Makefile.PL
+	   ! lib/WWW/SherlockSearch.pm
+	   ! lib/WWW/SherlockSearch/Results.pm
 ____________________________________________________________________________
 [  2781] By: autrijus                              on 2002/12/19  05:18:23
         Log: * strictness.
@@ -216,7 +187,8 @@ ____________________________________________________________________________
 ____________________________________________________________________________
 [  2780] By: autrijus                              on 2002/12/19  05:17:44
         Log: * move to lib/.
-	  +> lib/WWW/SherlockSearch.pm lib/WWW/SherlockSearch/Results.pm
+	  +> lib/WWW/SherlockSearch.pm
+	  +> lib/WWW/SherlockSearch/Results.pm
 	   - SherlockSearch.pm SherlockSearch/Results.pm
 ____________________________________________________________________________
 [  2779] By: autrijus                              on 2002/12/19  05:10:20
@@ -234,5 +206,5 @@ ____________________________________________________________________________
 ____________________________________________________________________________
 [  2766] By: autrijus                              on 2002/12/18  17:36:53
         Log: * new place sir.
-	  +> SherlockSearch.pm SherlockSearch/Results.pm plugins/clkao.src
-	  +> script/sherch
+	  +> SherlockSearch.pm SherlockSearch/Results.pm
+	  +> plugins/clkao.src script/sherch

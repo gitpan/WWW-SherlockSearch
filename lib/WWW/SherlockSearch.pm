@@ -1,18 +1,18 @@
 # $File: //member/autrijus/WWW-SherlockSearch/lib/WWW/SherlockSearch.pm $ $Author: autrijus $
-# $Revision: #29 $ $Change: 9675 $ $DateTime: 2004/01/11 16:26:16 $ vim: expandtab shiftwidth=4
+# $Revision: #31 $ $Change: 9681 $ $DateTime: 2004/01/12 15:44:47 $ vim: expandtab shiftwidth=4
 
 package WWW::SherlockSearch;
-$WWW::SherlockSearch::VERSION = '0.17';
+$WWW::SherlockSearch::VERSION = '0.18';
 
 use strict;
-use vars '$ExcerptLength';
+use vars qw($ExcerptLength $UAClass);
 
-use LWP::RobotUA;
 use HTTP::Cookies;
 use HTTP::Request::Common;
 use WWW::SherlockSearch::Results;
 
 $ExcerptLength = 100;
+$UAClass = 'LWP::RobotUA';
 
 =head1 NAME
 
@@ -20,7 +20,7 @@ WWW::SherlockSearch - Parse and execute Apple Sherlock 2 plugins
 
 =head1 VERSION
 
-This document describes version 0.17 of WWW::SherlockSearch, released
+This document describes version 0.18 of WWW::SherlockSearch, released
 January 12, 2003.
 
 =head1 SYNOPSIS
@@ -28,6 +28,7 @@ January 12, 2003.
     use WWW::SherlockSearch;
 
     my $sherlock = WWW::SherlockSearch->new('google.src');
+
     my $text = $sherlock->asString;
     my $rss  = $sherlock->asRssString;
     my $src  = $sherlock->asSherlockString;
@@ -62,6 +63,11 @@ Please see L<http://mycroft.mozdev.org/> for a repository and
 detailed description of Sherlock 2 plugins.
 
 =cut
+
+sub import {
+    my $class = shift;
+    $UAClass = shift if @_;
+}
 
 sub new {
     my $type = shift;
@@ -105,9 +111,13 @@ sub setPictureUrl {
 }
 
 sub loadFile {
-    my ($self, $filename) = @_;
+    my $self = shift;
+    my $filename = shift or return;
 
-    {
+    if (UNIVERSAL::isa($filename, 'SCALAR')) {
+        $self->initialiseSearch($$filename);
+    }
+    else {
         local $/;
         open(SHERFILE, $filename) or die "Couldn't open $filename: $!";
         $self->initialiseSearch(<SHERFILE>);
@@ -304,7 +314,12 @@ sub printHash {
 
 sub find {
     my ($self, $query, $limit, $skip_href) = @_;
-    my $search = LWP::RobotUA->new(
+
+    my $ua_pm = "$UAClass.pm";
+    $ua_pm =~ s{::}{/}g;
+    require $ua_pm;
+    
+    my $search = $UAClass->new(
         'Mozilla/5.0 Gecko/libwww-perl', 'autrijus@cpan.org',
     );
     my ($result, @post, $get, $rv);
@@ -442,7 +457,8 @@ sub convertResults {
         $resultStruct->setHost($self->{host});
         $resultStruct->setPictureUrl($self->getPictureUrl);
         $resultStruct->setChannelUrl(
-            $self->getChannelUrl || $self->{search}{action}
+            $self->getChannelUrl ||
+            ($self->{search}{action} . $self->getGetData)
         );
         $resultStruct->setQueryAttr($self->getQueryAttr);
     }

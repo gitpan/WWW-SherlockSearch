@@ -1,4 +1,4 @@
-#line 1 "inc/Module/Install/Metadata.pm - /usr/local/lib/perl5/site_perl/5.8.0/Module/Install/Metadata.pm"
+#line 1 "inc/Module/Install/Metadata.pm - /usr/local/lib/perl5/site_perl/5.8.2/Module/Install/Metadata.pm"
 # $File: //depot/cpan/Module-Install/lib/Module/Install/Metadata.pm $ $Author: autrijus $
 # $Revision: #31 $ $Change: 1817 $ $DateTime: 2003/12/14 20:57:39 $ vim: expandtab shiftwidth=4
 
